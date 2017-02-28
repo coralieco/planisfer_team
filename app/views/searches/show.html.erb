@@ -415,7 +415,8 @@
         <div class="row">
           <% @trips_selection.each do |trip| %>
             <div class="col-xs-12 col-sm-12">
-              <%= link_to round_trip_flight_refresh_map_path(trip.round_trip_flight), remote: true, class: "tabLink result-card" do %>
+            <!-- round_trip_flight_refresh_map_path(trip.round_trip_flight) -->
+              <%= link_to trip_path(@trips), remote: true, class: "tabLink result-card" do %>
                 <!-- <div class="flexbox"> -->
                   <div class="cardContainer ">
                     <div class="card-description">
