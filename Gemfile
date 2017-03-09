@@ -21,6 +21,7 @@ gem "geocoder"
 gem "coffee-rails"
 gem "gmaps4rails"
 gem 'rails-assets-seiyria-bootstrap-slider', source: 'https://rails-assets.org'
+gem 'skyscanner'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

@@ -1,12 +1,13 @@
 require 'rest-client'
 
+
 module Avion
   # Has a method #make_request that sends a request to QPX and gets a response
   # in original JSON
   class QPXRequester
     def initialize(args = {})
-      @city = args[:city] # airport code
-      @region_airport1 = args[:region_airport1]
+      @city = "PARI-sky" # airport code
+      @region_airport1 = "BCN-sky"
       @region_airport2 = args[:region_airport2]
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
@@ -20,39 +21,10 @@ module Avion
     end
 
     def make_request
-      GET http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/@market/@currency/@locale/@city/@region_airport1/@starts_on/@returns_on?apiKey=@api_key HTTP/1.1
-      Host: api.skyscanner.net
-      Accept: application/json
+      url = 'http://api.skyscanner.net/apiservices/browsequotes/v1.0/' + @market +'/' + @currency + '/' + @locale + '/' + @city +'/' + @region_airport1 + '/' + @starts_on + '/' + @returns_on +'?apikey=pl494470952664643652780754026393'
+      response = RestClient.get url, content_type: :json, accept: :json
+      response.body
     end
 
-    private
-
-    # def compose_request
-    #   # HERE IS A QPX ACCEPTED REQUEST FORM
-    #   # ONLY CHANGE IT TO MAKE MORE VALUES DYNAMIC
-    #   # WITHOUT BREAKING THE STRUCTURE!
-    #   request_hash = {
-    #     'request' =>
-    #     { 'slice' => [
-    #       { 'origin' => @city,
-    #         'destination' => @region_airport1,
-    #         'date' => @starts_on,
-    #         'maxStops' => 0 },
-    #       { 'origin' => @region_airport2,
-    #         'destination' => @city,
-    #         'date' => @returns_on,
-    #         'maxStops' => 0 }
-    #     ],
-    #       'passengers' =>
-    #     { 'adultCount' => @nb_travelers,
-    #       'infantInLapCount' => 0,
-    #       'infantInSeatCount' => 0,
-    #       'childCount' => 0,
-    #       'seniorCount' => 0 },
-    #       'solutions' => @nb_solutions,
-    #       'refundable' => false }
-    #   }
-    #   JSON.generate(request_hash)
-    # end
   end
 end
